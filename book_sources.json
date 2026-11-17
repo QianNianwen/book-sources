@@ -1,0 +1,117 @@
+[
+  {
+    "bookSourceName": "笔趣阁（biqige.info）",
+    "bookSourceGroup": "小说",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://wap.biqige.info",
+    "bookUrlPattern": "https?://wap\\.biqige\\.info/\\d+/\\d+/",
+    "enabled": true,
+    "enabledExplore": false,
+    "enabledCookieJar": true,
+    "searchUrl": "/s.php,{\"charset\":\"gbk\",\"method\":\"POST\",\"body\":\"s={{key}}&type=articlename\"}",
+    "ruleSearch": {
+      "bookList": "@css:.search_box .search_list",
+      "name": "@css:a:nth-of-type(1)@text",
+      "bookUrl": "@css:a:nth-of-type(1)@href",
+      "author": "@css:a:nth-of-type(3)@text",
+      "kind": "@css:a:nth-of-type(2)@text"
+    },
+    "ruleBookInfo": {
+      "name": "@css:.catalog1 h1@text",
+      "author": "@css:.catalog1 .tab .p1@text##^作者：",
+      "kind": "@css:.catalog1 .tab p:nth-of-type(2)@text##^类别：",
+      "coverUrl": "@css:.catalog1 .tu img@data-original",
+      "intro": "@css:.catalog .jj > p.p2@text",
+      "lastChapter": "@css:.catalog1 .tab .p3 a@text",
+      "tocUrl": "@css:.listpage option:first-child@value"
+    },
+    "ruleToc": {
+      "chapterList": "@css:.info_chapters > ul.p2:last-of-type > li",
+      "chapterName": "@css:a@text",
+      "chapterUrl": "@css:a@href",
+      "nextTocUrl": "@css:.listpage .right a[href]@href"
+    },
+    "ruleContent": {
+      "content": "@css:#novelcontent@html",
+      "nextContentUrl": "@css:.page_chapter a.p4:contains(下一页)[href]@href"
+    }
+  },
+  {
+    "bookSourceName": "笔趣阁小说网（17177.cc）",
+    "bookSourceGroup": "小说",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://www.17177.cc",
+    "header": "{\"User-Agent\":\"Mozilla/5.0\"}",
+    "bookUrlPattern": "https?://www\\.17177\\.cc/[^/]+/",
+    "enabled": true,
+    "enabledExplore": false,
+    "lastUpdateTime": 1794927921273,
+    "searchUrl": "/search.php?q={{key}}&p={{page}}",
+    "ruleSearch": {
+      "bookList": "@css:.hot dl",
+      "name": "@css:dt img@alt",
+      "author": "@css:dd.book_other span@text",
+      "bookUrl": "@css:h3 a@href",
+      "coverUrl": "@css:dt img@src",
+      "lastChapter": "@css:dd.book_other:last-of-type a@text"
+    },
+    "ruleBookInfo": {
+      "name": "@css:meta[property=\"og:novel:book_name\"]@content",
+      "author": "@css:meta[property=\"og:novel:author\"]@content",
+      "kind": "@css:meta[property=\"og:novel:category\"]@content",
+      "coverUrl": "@css:meta[property=\"og:image\"]@content",
+      "intro": "@css:meta[property=\"og:description\"]@content",
+      "lastChapter": "@css:meta[property=\"og:novel:latest_chapter_name\"]@content",
+      "tocUrl": ""
+    },
+    "ruleToc": {
+      "chapterList": "@css:.book_list2 li",
+      "chapterName": "@css:a@text",
+      "chapterUrl": "@css:a@href",
+      "nextTocUrl": "@css:.pagination li.active + li a:not([aria-label])@href"
+    },
+    "ruleContent": {
+      "content": "@css:.single article@html",
+      "nextContentUrl": "@css:#next[href~=/\\d+_\\d+/$]@href"
+    }
+  },
+  {
+    "bookSourceName": "蚂蚁文学（mayiwsk.info）",
+    "bookSourceGroup": "小说",
+    "bookSourceType": 0,
+    "bookSourceUrl": "http://www.mayiwsk.info",
+    "bookUrlPattern": "https?://www\\.mayiwsk\\.info/\\d+_\\d+/(?:index\\.html)?",
+    "header": "{\"User-Agent\":\"Mozilla/5.0\"}",
+    "enabled": true,
+    "enabledExplore": false,
+    "enabledCookieJar": true,
+    "lastUpdateTime": 1794931552369,
+    "searchUrl": "/modules/article/search.php?searchkey={{key}}&searchtype=articlename&page={{page}}",
+    "ruleSearch": {
+      "bookList": "@css:table.grid tr:has(td)",
+      "name": "@css:td:nth-child(1) a@text",
+      "bookUrl": "@css:td:nth-child(1) a@href",
+      "author": "@css:td:nth-child(3)@text",
+      "lastChapter": "@css:td:nth-child(2) a@text",
+      "wordCount": "@css:td:nth-child(4)@text",
+      "kind": "@css:td:nth-child(6)@text"
+    },
+    "ruleBookInfo": {
+      "name": "@css:meta[property=\"og:novel:book_name\"]@content",
+      "author": "@css:meta[property=\"og:novel:author\"]@content",
+      "kind": "@css:meta[property=\"og:novel:category\"]@content",
+      "coverUrl": "@css:meta[property=\"og:image\"]@content",
+      "intro": "@css:#intro@html",
+      "lastChapter": "@css:meta[property=\"og:novel:latest_chapter_name\"]@content",
+      "tocUrl": ""
+    },
+    "ruleToc": {
+      "chapterList": "@css:#list dl > dt:contains(正文) ~ dd",
+      "chapterName": "@css:a@text",
+      "chapterUrl": "@css:a@href"
+    },
+    "ruleContent": {
+      "content": "@css:#content@html"
+    }
+  }
+]
