@@ -1,7 +1,7 @@
 [
   {
     "bookSourceName": "笔趣阁（biqige.info）",
-    "bookSourceGroup": "小说",
+    "bookSourceGroup": "普通小说",
     "bookSourceType": 0,
     "bookSourceUrl": "https://wap.biqige.info",
     "bookUrlPattern": "https?://wap\\.biqige\\.info/\\d+/\\d+/",
@@ -34,18 +34,19 @@
     "ruleContent": {
       "content": "@css:#novelcontent@html",
       "nextContentUrl": "@css:.page_chapter a.p4:contains(下一页)[href]@href"
-    }
+    },
+    "lastUpdateTime": 1795092911907
   },
   {
     "bookSourceName": "笔趣阁小说网（17177.cc）",
-    "bookSourceGroup": "小说",
+    "bookSourceGroup": "普通小说",
     "bookSourceType": 0,
     "bookSourceUrl": "https://www.17177.cc",
     "header": "{\"User-Agent\":\"Mozilla/5.0\"}",
     "bookUrlPattern": "https?://www\\.17177\\.cc/[^/]+/",
     "enabled": true,
     "enabledExplore": false,
-    "lastUpdateTime": 1794927921273,
+    "lastUpdateTime": 1795092911907,
     "searchUrl": "/search.php?q={{key}}&p={{page}}",
     "ruleSearch": {
       "bookList": "@css:.hot dl",
@@ -77,7 +78,7 @@
   },
   {
     "bookSourceName": "蚂蚁文学（mayiwsk.info）",
-    "bookSourceGroup": "小说",
+    "bookSourceGroup": "普通小说",
     "bookSourceType": 0,
     "bookSourceUrl": "http://www.mayiwsk.info",
     "bookUrlPattern": "https?://www\\.mayiwsk\\.info/\\d+_\\d+/(?:index\\.html)?",
@@ -85,7 +86,7 @@
     "enabled": true,
     "enabledExplore": false,
     "enabledCookieJar": true,
-    "lastUpdateTime": 1794931552369,
+    "lastUpdateTime": 1795092911907,
     "searchUrl": "/modules/article/search.php?searchkey={{key}}&searchtype=articlename&page={{page}}",
     "ruleSearch": {
       "bookList": "@css:table.grid tr:has(td)",
@@ -115,8 +116,8 @@
     }
   },
   {
-    "bookSourceName": "禁忌书屋（cool18）",
-    "bookSourceGroup": "论坛小说",
+    "bookSourceName": "❤️ 禁忌书屋（cool18）",
+    "bookSourceGroup": "成人小说",
     "bookSourceType": 0,
     "bookSourceUrl": "https://www.cool18.com/bbs4",
     "bookUrlPattern": "https?://www\\.cool18\\.com/bbs4/index\\.php\\?(?=[^#]*\\bapp=forum(?:&|$))(?=[^#]*\\bact=threadview(?:&|$))(?=[^#]*\\btid=\\d+)[^#]+",
@@ -125,7 +126,7 @@
     "enabled": true,
     "enabledExplore": false,
     "enabledCookieJar": true,
-    "lastUpdateTime": 1795091492598,
+    "lastUpdateTime": 1795092911907,
     "searchUrl": "https://www.cool18.com/bbs4/index.php?action=search&bbsdr=bbs4&act=threadsearch&app=forum&keywords={{key}}&submit=%E6%9F%A5%E8%AF%A2&first=1&p={{page}}",
     "ruleSearch": {
       "bookList": "@css:.thread-list > li:has(a[href*=\"act=threadview\"])",
