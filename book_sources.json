@@ -113,5 +113,41 @@
     "ruleContent": {
       "content": "@css:#content@html"
     }
+  },
+  {
+    "bookSourceName": "禁忌书屋（cool18）",
+    "bookSourceGroup": "论坛小说",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://www.cool18.com/bbs4",
+    "bookUrlPattern": "https?://www\\.cool18\\.com/bbs4/index\\.php\\?(?=[^#]*\\bapp=forum(?:&|$))(?=[^#]*\\bact=threadview(?:&|$))(?=[^#]*\\btid=\\d+)[^#]+",
+    "bookSourceComment": "使用 bbs4 页面“查询”的站内搜索，开启“只看主帖”，支持搜索分页。每个主帖作为一本书；目录按发表顺序收录主帖及同一发帖者的同书名或章号续文，不合并独立主帖。作者优先取标题署名，否则显示发帖者。原站无固定封面、独立简介，详情展示帖子信息；保留正文广告。目录需执行 JavaScript 请求站点 achildlist 接口。",
+    "header": "{\"User-Agent\":\"Mozilla/5.0\",\"Referer\":\"https://www.cool18.com/bbs4/index.php\"}",
+    "enabled": true,
+    "enabledExplore": false,
+    "enabledCookieJar": true,
+    "lastUpdateTime": 1795091492598,
+    "searchUrl": "https://www.cool18.com/bbs4/index.php?action=search&bbsdr=bbs4&act=threadsearch&app=forum&keywords={{key}}&submit=%E6%9F%A5%E8%AF%A2&first=1&p={{page}}",
+    "ruleSearch": {
+      "bookList": "@css:.thread-list > li:has(a[href*=\"act=threadview\"])",
+      "name": "@css:a[href*=\"act=threadview\"]@text",
+      "bookUrl": "@css:a[href*=\"act=threadview\"]@href",
+      "author": "@js:\nvar t = java.getString('@css:a[href*=\"act=threadview\"]@text');\nvar m = String(t).match(/(?:作者|作)\\s*[:：]\\s*(\\S+)/);\nm ? m[1] : java.getString('@css:font@text');",
+      "lastChapter": "@css:a[href*=\"act=threadview\"]@text",
+      "intro": "@css:i@text"
+    },
+    "ruleBookInfo": {
+      "name": "@css:h1.main-title@text",
+      "author": "@js:\nvar t = java.getString('@css:h1.main-title@text');\nvar m = String(t).match(/(?:作者|作)\\s*[:：]\\s*(\\S+)/);\nm ? m[1] : java.getString('@css:.sender a@text');",
+      "intro": "@css:.title-section@text",
+      "tocUrl": "@css:input[name=\"rootid\"]@value##^([0-9]+)$##https://www.cool18.com/bbs4/index.php?app=forum&act=threadview&tid=$1"
+    },
+    "ruleToc": {
+      "chapterList": "@js:\nvar doc = org.jsoup.Jsoup.parse(String(result));\nvar title = String(doc.select('h1.main-title').text());\nvar pageId = String(baseUrl).match(/[?&]tid=(\\d+)/);\nif (!pageId || !title) throw new Error('未取得帖子标题或编号');\nvar tid = pageId[1];\nvar info = String(doc.select('script:containsData(const threadInfo)').html());\nvar uid = info.match(/\"uid\"\\s*:\\s*\"?(\\d+)/);\nif (!uid) throw new Error('未取得发帖者编号');\nvar bookName = title.match(/[【《]([^】》]+)[】》]/);\nvar key = bookName ? bookName[1] : title.replace(/(?:作者|作)\\s*[:：].*$/, '').replace(/[（(].*$/, '').trim();\nvar prefix = 'https://www.cool18.com/bbs4/index.php?app=forum&act=threadview&tid=';\nvar rows = JSON.parse(String(java.ajax('https://www.cool18.com/bbs4/index.php?app=forum&act=achildlist&tid=' + tid)));\nif (!Array.isArray(rows)) throw new Error('续文接口未返回列表');\nvar chapters = [{tid: tid, subject: title}];\nrows.sort(function(a, b) { return Number(a.tid) - Number(b.tid); });\nvar seen = {};\nseen[tid] = true;\nfor (var i = 0; i < rows.length; i++) {\n    var row = rows[i];\n    var subject = String(row.subject);\n    var sameBook = key && subject.indexOf(key) >= 0;\n    var numbered = /^(?:第[０-９0-9一二三四五六七八九十百千零〇两]+[章节回卷集部]|[（(]?[０-９0-9]+[）).、:：]|续[文篇]?|正文)/.test(subject);\n    if (String(row.uid) === uid[1] && Number(row.size) > 0 && (sameBook || numbered) && !seen[row.tid]) {\n        chapters.push(row);\n        seen[row.tid] = true;\n    }\n}\nvar toc = org.jsoup.Jsoup.parse('<ul></ul>');\nvar list = toc.select('ul').first();\nfor (var j = 0; j < chapters.length; j++) {\n    list.appendElement('li').appendElement('a').attr('href', prefix + chapters[j].tid).text(String(chapters[j].subject));\n}\ntoc.select('li');",
+      "chapterName": "@css:a@text",
+      "chapterUrl": "@css:a@href"
+    },
+    "ruleContent": {
+      "content": "@css:#content-section pre@html"
+    }
   }
 ]
